@@ -24,18 +24,18 @@ $books = array(
 );
 
 
-// foreach ($books as $title => $book ) {
+foreach ($books as $title => $book ) {
 
-// 	if ($book['published'] > 1950) {
+	if ($book['published'] > 1950) {
 
-// 		echo "$title \n";
+		echo "$title \n";
 
-// 		foreach ($book as $detail => $info) {
-// 			echo "{$detail}: {$info}\n";
-// 			// echo "---------------\n";
-// 		}
-// 	}
-// }	
+		foreach ($book as $detail => $info) {
+			echo "{$detail}: {$info}\n";
+			// echo "---------------\n";
+		}
+	}
+}	
 
 foreach ($books as $title => $book) {
 
