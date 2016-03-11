@@ -11,7 +11,7 @@ class Log
 	{	$date = date("y-m-d");
     	$time = date("h:i:s");
 
-		$this->filename = $prefix .  $date . '.log';
+		$this->filename = __DIR__ . '/public/logs/' . $prefix .  $date . '.log';
     	$this->handle = fopen($this->filename, 'a');
 
 	}
@@ -39,14 +39,14 @@ class Log
 	public function logInfo($message)
 	
 	{
-  		logMessage("INFO", $message);
+  		$this->logMessage("INFO", $message);
 	}
 
 
 	public function logError($message)
 	
 	{
-  	logMessage("ERROR", $message);
+  		$this->logMessage("ERROR", $message);
 	}
 
 		
