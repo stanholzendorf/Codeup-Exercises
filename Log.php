@@ -3,17 +3,30 @@
 class Log 
 {
 	
-	public $filename;
-	public $handle;
+	private $filename;
+	private $handle;
+
+
+	protected function setfilenameString($prefix)
+	{
+		$date = date("y-m-d");
+		$this->filename = __DIR__ . '/public/logs/' . $prefix .  $date . '.log';
+		if (!is_string($this->filename)) {
+			echo "Value needs to be a string!";
+			die();
+		}
+	}
+
 
 	public function __construct($prefix = "log.")
 
-	{	$date = date("y-m-d");
-    	$time = date("h:i:s");
+	{	
+		$this->setfilenameString($prefix);
+		if (!is_string($prefix)) {
+			echo "Value needs to be a string!";
+		}
 
-		$this->filename = __DIR__ . '/public/logs/' . $prefix .  $date . '.log';
-    	$this->handle = fopen($this->filename, 'a');
-
+		$this->handle = fopen($this->filename, 'a');
 	}
 
 	public function ____destruct()
@@ -26,14 +39,16 @@ class Log
 
 	public function logMessage($logLevel, $message)
 	{
-    
-		$date = date("y-m-d");
-    	$time = date("h:i:s");
-
-  //   	$this->filename = $date . '.log';
-  //   	$handle = fopen($this->filename, 'a');
-    	fwrite($this->handle, $date . " " . $time . " " .  "[$logLevel]" . " " . $message . PHP_EOL);
-		// fclose($handle);
+		if (!is_writable($this->filename) || !touch($this->filename)) {
+			echo "Not possible!";
+		} else {
+	    	$date = date("y-m-d");
+	    	$time = date("h:i:s");
+	    	// $this->handle = fopen($this->filename, 'a');
+	    	fwrite($this->handle, $date . " " . $time . " " .  "[$logLevel]" . " " . $message . PHP_EOL);
+			
+		}
+  		
 	}
 
 	public function logInfo($message)
