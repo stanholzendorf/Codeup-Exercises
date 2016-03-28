@@ -3,7 +3,7 @@
 class Model
 {
 	private $attributes = [];
-	protected static $table = '';
+	protected static $table = 'test';
 
 	public static function getTableName()
 	{
@@ -20,8 +20,11 @@ class Model
 		if(array_key_exists($name, $this->attributes))
 		{
 			return $this->attributes[$name];
+			
 		}
 
 		return null;
 	}
+
+
 }
